@@ -2,7 +2,7 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-export default function GuestLayout() {
+export default function UserLayout() {
   return (
     <div className='flex min-h-screen flex-col font-sans antialiased'>
       <Navbar />

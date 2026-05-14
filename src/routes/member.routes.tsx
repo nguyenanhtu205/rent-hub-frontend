@@ -1,8 +1,8 @@
-﻿import GuestLayout from '../layouts/GuestLayout';
+﻿import UserLayout from '../layouts/UserLayout';
 import { PropertyDetailPage } from '../pages';
 
 export const memberRoutes = {
   path: '/',
-  element: <GuestLayout />,
+  element: <UserLayout />,
   children: [{ path: 'properties/:id', element: <PropertyDetailPage /> }],
 };

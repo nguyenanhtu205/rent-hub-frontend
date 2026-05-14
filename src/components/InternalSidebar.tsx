@@ -4,7 +4,7 @@ import { type Role, ROLE_MENUS } from '../types/internal';
 import { useEffect, useState } from 'react';
 import { useAuthStore } from '../stores/authStore';
 
-export default function Sidebar() {
+export default function InternalSidebar() {
   const { user, setRole } = useAuthStore();
 
   const navigate = useNavigate();

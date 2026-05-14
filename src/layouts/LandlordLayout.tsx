@@ -1,10 +1,10 @@
 ﻿import { Outlet } from 'react-router-dom';
-import InternalSidebar from '../components/InternalSidebar';
+import LandlordSidebar from '../components/LandlordSidebar';
 
-export default function InternalLayout() {
+export default function LandlordLayout() {
   return (
     <div className='flex h-screen overflow-hidden font-sans antialiased'>
-      <InternalSidebar />
+      <LandlordSidebar />
       <main className='min-h-0 flex-1 overflow-y-auto'>
         <Outlet />
       </main>

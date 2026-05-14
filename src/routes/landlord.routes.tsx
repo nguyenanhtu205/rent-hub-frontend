@@ -1,7 +1,8 @@
 ﻿import { LandlordPortalPage } from '../pages';
+import LandlordLayout from '../layouts/LandlordLayout.tsx';
 
 export const landlordRoutes = {
   path: 'landlord',
-  element: null,
-  children: [{ path: 'portal', element: <LandlordPortalPage /> }],
+  element: <LandlordLayout />,
+  children: [{ path: 'dashboard', element: <LandlordPortalPage /> }],
 };

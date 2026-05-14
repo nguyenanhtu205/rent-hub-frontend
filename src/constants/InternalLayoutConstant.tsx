@@ -23,12 +23,12 @@ type MenuItem = {
   path: string;
   icon: ReactNode;
   group?: string;
-}
+};
 
 export const MENU_ITEMS: MenuItem[] = [
   {
     key: 'dashboard',
-    label: 'Dashboard',
+    label: 'Bảng điều khiển',
     path: '/internal/dashboard',
     group: 'Tổng quan',
     icon: <DashboardIcon />,
