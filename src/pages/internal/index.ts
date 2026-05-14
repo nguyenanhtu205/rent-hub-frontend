@@ -1,0 +1,15 @@
+﻿export { default as AuditLogPage } from './AuditLog';
+export { default as CalendarPage } from './Calendar';
+export { default as ComissionPage } from './Comission';
+export { default as CustomersPage } from './Customers';
+export { default as DashboardPage } from './Dashboard';
+export { default as DepositPage } from './Deposit';
+export { default as InteractionHistoryPage } from './InteractionHistory';
+export { default as LegalApprovalPage } from './LegalApproval';
+export { default as PropertyDetailPage } from './PropertyDetail';
+export { default as PropertyListPage } from './PropertyList';
+export { default as RecordTransactionPage } from './RecordTransaction';
+export { default as RentalPipelinePage } from './RentalPipeline';
+export { default as ReportsPage } from './Reports';
+export { default as ValuationPage } from './Valuation';
+export { default as WorkQueuePage } from './WorkQueue';

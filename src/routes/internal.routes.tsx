@@ -1,0 +1,40 @@
+﻿import InternalLayout from '../layouts/InternalLayout';
+import {
+  AuditLogPage,
+  CalendarPage,
+  ComissionPage,
+  CustomersPage,
+  DashboardPage,
+  DepositPage,
+  InteractionHistoryPage,
+  LegalApprovalPage,
+  PropertyDetailPage,
+  PropertyListPage,
+  RecordTransactionPage,
+  RentalPipelinePage,
+  ReportsPage,
+  ValuationPage,
+  WorkQueuePage,
+} from '../pages/internal';
+
+export const internalRoutes = {
+  path: '/internal',
+  element: <InternalLayout />,
+  children: [
+    { path: 'dashboard', element: <DashboardPage /> },
+    { path: 'work-queue', element: <WorkQueuePage /> },
+    { path: 'properties', element: <PropertyListPage /> },
+    { path: 'properties/:id', element: <PropertyDetailPage /> },
+    { path: 'calendar', element: <CalendarPage /> },
+    { path: 'customers', element: <CustomersPage /> },
+    { path: 'interactions', element: <InteractionHistoryPage /> },
+    { path: 'pipeline', element: <RentalPipelinePage /> },
+    { path: 'record-transaction', element: <RecordTransactionPage /> },
+    { path: 'commission', element: <ComissionPage /> },
+    { path: 'valuation', element: <ValuationPage /> },
+    { path: 'legal-approval', element: <LegalApprovalPage /> },
+    { path: 'deposit', element: <DepositPage /> },
+    { path: 'reports', element: <ReportsPage /> },
+    { path: 'audit-log', element: <AuditLogPage /> },
+  ],
+};
