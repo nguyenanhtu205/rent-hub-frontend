@@ -12,7 +12,7 @@ import {
   ShieldCheck,
   Square,
 } from 'lucide-react';
-import { MOCK_PROPERTIES, PROPERTY_TYPE_LABELS } from '../constants/mockData';
+import { MOCK_PROPERTIES, PROPERTY_TYPE_LABELS } from '../mocks/data/mockData';
 
 function Spec({ icon, label, value }: { icon: ReactNode; label: string; value: ReactNode }) {
   return (

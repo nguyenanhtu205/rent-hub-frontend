@@ -1,12 +1,13 @@
 ﻿import type {
   Appointment,
+  AuditLogEntry,
   CommissionRecord,
   Customer,
   DepositRecord,
   InternalProperty,
   RentalDeal,
   WorkItem,
-} from '../types/internal';
+} from '../../types/internal';
 
 export const MOCK_INT_PROPERTIES: InternalProperty[] = [
   {
@@ -410,5 +411,124 @@ export const MOCK_COMMISSIONS: CommissionRecord[] = [
     amount: 180_000,
     status: 'pending',
     month: '2025-05',
+  },
+];
+
+export const MOCK_AUDIT_LOGS: AuditLogEntry[] = [
+  {
+    time: '2025-05-13 09:42:11',
+    actor: 'Nguyễn Văn A',
+    role: 'Admin',
+    action: 'Tạo hợp đồng',
+    target: 'CT-2025-0421',
+    ip: '113.22.45.18',
+    type: 'create',
+  },
+  {
+    time: '2025-05-13 09:30:54',
+    actor: 'Trần Thị B',
+    role: 'Môi giới',
+    action: 'Cập nhật bất động sản',
+    target: 'BDS-1098',
+    ip: '14.241.88.102',
+    type: 'update',
+  },
+  {
+    time: '2025-05-13 09:12:03',
+    actor: 'Lê Minh C',
+    role: 'Khách hàng',
+    action: 'Đăng nhập hệ thống',
+    target: 'session#a91f2c',
+    ip: '203.205.30.7',
+    type: 'login',
+  },
+  {
+    time: '2025-05-13 08:55:42',
+    actor: 'Phạm Quốc D',
+    role: 'Kế toán',
+    action: 'Xóa giao dịch',
+    target: 'TX-77821',
+    ip: '171.244.10.55',
+    type: 'delete',
+  },
+  {
+    time: '2025-05-13 08:40:19',
+    actor: 'Nguyễn Văn A',
+    role: 'Admin',
+    action: 'Xem hồ sơ khách hàng',
+    target: 'KH-3320',
+    ip: '113.22.45.18',
+    type: 'view',
+  },
+];
+
+export const MOCK_INTERACTIONS = [
+  {
+    date: '2025-05-12',
+    client: 'Lê Minh Khoa',
+    broker: 'Nguyễn Minh Tuấn',
+    type: 'Gọi điện',
+    note: 'Khách quan tâm Studio Tây Hồ. Đặt lịch xem ngày 14/5.',
+  },
+  {
+    date: '2025-05-11',
+    client: 'Bùi Thu Hà',
+    broker: 'Nguyễn Minh Tuấn',
+    type: 'Zalo/Chat',
+    note: 'Gửi thông tin Vinhomes 2PN. Khách đang cân nhắc.',
+  },
+  {
+    date: '2025-05-10',
+    client: 'Trần Công Danh',
+    broker: 'Lê Thanh Sơn',
+    type: 'Xem nhà',
+    note: 'Xem Biệt thự Thảo Điền. Khách hài lòng, đang thương lượng giá.',
+  },
+  {
+    date: '2025-05-09',
+    client: 'Phan Thị Ngọc',
+    broker: 'Nguyễn Minh Tuấn',
+    type: 'Email',
+    note: 'Gửi danh sách nhà phố quận 7. Chờ phản hồi.',
+  },
+];
+
+export const MOCK_BROKER_KPI = [
+  { name: 'Nguyễn Minh Tuấn', deals: 3, viewings: 8, converted: 1, commission: 275_000 },
+  { name: 'Lê Thanh Sơn', deals: 2, viewings: 5, converted: 2, commission: 1_100_000 },
+];
+
+export const MOCK_DOCS = [
+  { name: 'CMND/CCCD chủ nhà.pdf', size: '2.1 MB', uploaded: '2025-05-01', type: 'identity' },
+  { name: 'Giấy chứng nhận sở hữu.pdf', size: '5.3 MB', uploaded: '2025-05-01', type: 'ownership' },
+  { name: 'Ảnh chụp thực địa (1).jpg', size: '3.8 MB', uploaded: '2025-05-05', type: 'photo' },
+  { name: 'Ảnh chụp thực địa (2).jpg', size: '4.1 MB', uploaded: '2025-05-05', type: 'photo' },
+  { name: 'Biên bản thẩm định.docx', size: '156 KB', uploaded: '2025-05-07', type: 'report' },
+];
+
+export const MOCK_HISTORY = [
+  {
+    date: '2025-05-10',
+    actor: 'Trần Thị Lan',
+    role: 'Thẩm định',
+    action: 'Hoàn thành khảo sát thực địa. Bất động sản trong tình trạng tốt, đề xuất duyệt.',
+  },
+  {
+    date: '2025-05-05',
+    actor: 'Trần Thị Lan',
+    role: 'Thẩm định',
+    action: 'Lên lịch khảo sát thực địa ngày 05/05.',
+  },
+  {
+    date: '2025-05-02',
+    actor: 'Nguyễn Minh Tuấn',
+    role: 'Môi giới',
+    action: 'Tiếp nhận và phân công hồ sơ cho thẩm định.',
+  },
+  {
+    date: '2025-05-01',
+    actor: 'Hệ thống',
+    role: 'System',
+    action: 'Hồ sơ được nộp và tạo mã BDS-2025-001.',
   },
 ];

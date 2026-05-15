@@ -1,5 +1,13 @@
 ﻿import { Activity, Download, Filter, Search, ShieldCheck } from 'lucide-react';
-import { AUDIT_LOGS, TYPE_STYLE } from '../../constants/AuditLogConstant';
+import { MOCK_AUDIT_LOGS } from '../../mocks/data/internalMockData';
+
+const TYPE_STYLE: Record<string, string> = {
+  create: 'bg-emerald-50 text-emerald-700 ring-emerald-200',
+  update: 'bg-sky-50 text-sky-700 ring-sky-200',
+  delete: 'bg-rose-50 text-rose-700 ring-rose-200',
+  login: 'bg-amber-50 text-amber-700 ring-amber-200',
+  view: 'bg-slate-50 text-slate-600 ring-slate-200',
+};
 
 export default function AuditLog() {
   return (
@@ -70,7 +78,7 @@ export default function AuditLog() {
                 </tr>
               </thead>
               <tbody className='divide-y divide-sky-50'>
-                {AUDIT_LOGS.map((log, i) => (
+                {MOCK_AUDIT_LOGS.map((log, i) => (
                   <tr
                     key={i}
                     className='group transition-colors hover:bg-linear-to-r hover:from-sky-50/60 hover:to-amber-50/40'
@@ -116,7 +124,7 @@ export default function AuditLog() {
 
           {/* Mobile cards */}
           <div className='divide-y divide-sky-50 md:hidden'>
-            {AUDIT_LOGS.map((log, i) => (
+            {MOCK_AUDIT_LOGS.map((log, i) => (
               <div key={i} className='space-y-3 p-4'>
                 <div className='flex items-start justify-between gap-3'>
                   <div className='flex items-center gap-2.5'>
@@ -152,7 +160,7 @@ export default function AuditLog() {
           {/* Footer */}
           <div className='flex items-center justify-between border-t border-sky-100 bg-linear-to-r from-sky-50/50 to-amber-50/30 px-5 py-3 text-xs text-slate-500'>
             <span>
-              Hiển thị <b className='text-slate-700'>{AUDIT_LOGS.length}</b> bản ghi gần nhất
+              Hiển thị <b className='text-slate-700'>{MOCK_AUDIT_LOGS.length}</b> bản ghi gần nhất
             </span>
             <div className='flex items-center gap-1.5'>
               <span className='h-2 w-2 animate-pulse rounded-full bg-emerald-500' />

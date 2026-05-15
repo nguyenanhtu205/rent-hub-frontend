@@ -1,5 +1,5 @@
 ﻿import { Calendar, Eye, Phone, Plus, Sparkles, UserCircle2 } from 'lucide-react';
-import { MOCK_CUSTOMERS } from '../../constants/internalMockData';
+import { MOCK_CUSTOMERS } from '../../mocks/data/internalMockData';
 
 export default function Customers() {
   return (

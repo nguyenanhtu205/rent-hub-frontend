@@ -1,6 +1,6 @@
 ﻿import { Link } from 'react-router-dom';
 import type { Property } from '../types/property';
-import { PROPERTY_TYPE_LABELS } from '../constants/mockData';
+import { PROPERTY_TYPE_LABELS } from '../mocks/data/mockData';
 
 type Props = {
   property: Property;

@@ -1,7 +1,7 @@
 ﻿import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import PropertyCard from '../components/PropertyCard';
-import { MOCK_PROPERTIES } from '../constants/mockData';
+import { MOCK_PROPERTIES } from '../mocks/data/mockData';
 
 const STATS = [
   { value: '1.200+', label: 'Bất động sản' },

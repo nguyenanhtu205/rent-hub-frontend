@@ -1,4 +1,5 @@
-﻿import type { Property } from '../types/property';
+﻿import type { Property } from '../../types/property';
+import type { User } from '../../types/user.ts';
 
 export const MOCK_PROPERTIES: Property[] = [
   {
@@ -152,5 +153,64 @@ export const MOCK_PROPERTY_LANDLORD = [
     title: 'Studio Tây Hồ',
     status: 'Chờ ký hợp đồng',
     progress: 45,
+  },
+];
+
+export const MOCK_USERS: (User & { password: string })[] = [
+  {
+    id: '1',
+    name: 'Nguyễn Văn An',
+    email: 'member@test.com',
+    phone: '0901234567',
+    role: 'member',
+    password: 'nat1642005',
+  },
+  {
+    id: '2',
+    name: 'Trần Thị Bình',
+    email: 'landlord@test.com',
+    phone: '0912345678',
+    role: 'landlord',
+    password: 'nat1642005',
+  },
+  {
+    id: '3',
+    name: 'Nguyễn Minh Tuấn',
+    email: 'tuan.broker@renthub.vn',
+    phone: '',
+    role: 'broker',
+    password: 'nat1642005',
+  },
+  {
+    id: '4',
+    name: 'Trần Thị Lan',
+    email: 'lan.valuator@renthub.vn',
+    phone: '',
+    role: 'valuator',
+    password: 'nat1642005',
+  },
+  {
+    id: '5',
+    name: 'Lê Văn Pháp',
+    email: 'phap.legal@renthub.vn',
+    phone: '',
+    role: 'legal',
+    password: 'nat1642005',
+  },
+  {
+    id: '6',
+    name: 'Phạm Kế Toán',
+    email: 'ke.toán@renthub.vn',
+    phone: '',
+    role: 'accountant',
+    password: 'nat1642005',
+  },
+  {
+    id: '7',
+    name: 'Hoàng Quản Lý',
+    email: 'ql@renthub.vn',
+    phone: '',
+    role: 'manager',
+    password: 'nat1642005',
   },
 ];

@@ -1,8 +1,10 @@
 ﻿import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Home, Lock, ShieldAlert } from 'lucide-react';
+import { useAuthStore } from '../stores/authStore.ts';
 
 export default function Forbidden() {
   const navigate = useNavigate();
+  const user = useAuthStore((state) => state.user);
 
   return (
     <div className='relative flex min-h-screen items-center justify-center overflow-hidden bg-linear-to-br from-sky-50 via-white to-amber-50 px-6 text-slate-900'>
@@ -76,7 +78,15 @@ export default function Forbidden() {
           </button>
 
           <Link
-            to='/'
+            to={
+              !user
+                ? '/'
+                : user.role === 'member'
+                  ? '/'
+                  : user.role === 'landlord'
+                    ? '/landlord/dashboard'
+                    : '/internal/dashboard'
+            }
             className='group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-linear-to-r from-sky-600 to-blue-700 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition duration-500 hover:scale-105 hover:shadow-xl hover:shadow-sky-500/50'
           >
             <span className='absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/40 to-transparent transition-transform duration-500 group-hover:translate-x-full' />

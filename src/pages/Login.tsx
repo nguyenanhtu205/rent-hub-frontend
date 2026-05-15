@@ -1,34 +1,43 @@
-﻿import type { SubmitEvent } from 'react';
-import { useState } from 'react';
+﻿import { type SubmitEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AlertCircle, ArrowRight, Eye, EyeOff, Loader2, Lock, Mail, ShieldCheck, } from 'lucide-react';
+import useLogin from '../hooks/useLogin';
+
+const stats: [string, string][] = [
+  ['1.200+', 'Bất động sản'],
+  ['98%', 'Hài lòng'],
+  ['850+', 'Giao dịch'],
+];
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login, isPending } = useLogin();
+
   const [form, setForm] = useState({ email: '', password: '', remember: false });
   const [showPw, setShowPw] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
+
     if (!form.email || !form.password) {
       setError('Vui lòng nhập đầy đủ thông tin.');
       return;
     }
-    setLoading(true);
-    // TODO: call API
-    await new Promise((r) => setTimeout(r, 1000));
-    setLoading(false);
-    navigate('/');
-  };
 
-  const stats: [string, string][] = [
-    ['1.200+', 'Bất động sản'],
-    ['98%', 'Hài lòng'],
-    ['850+', 'Giao dịch'],
-  ];
+    login(
+      { email: form.email, password: form.password },
+      {
+        onSuccess: (data) => {
+          if (data.user.role === 'member') navigate('/');
+          else if (data.user.role === 'landlord') navigate('/landlord/dashboard');
+          else navigate('/internal/dashboard');
+        },
+        onError: () => setError('Email hoặc mật khẩu không đúng.'),
+      },
+    );
+  };
 
   return (
     <div className='relative min-h-screen overflow-hidden bg-linear-to-br from-sky-50 via-white to-amber-50'>
@@ -206,11 +215,11 @@ export default function Login() {
                 {/* Submit */}
                 <button
                   type='submit'
-                  disabled={loading}
+                  disabled={isPending}
                   className='group relative inline-flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl bg-linear-to-r from-sky-600 to-blue-700 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-sky-500/30 transition duration-500 hover:scale-105 hover:shadow-xl hover:shadow-sky-500/50 disabled:cursor-not-allowed disabled:opacity-70'
                 >
                   <span className='absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover:translate-x-full' />
-                  {loading ? (
+                  {isPending ? (
                     <>
                       <Loader2 className='relative h-4 w-4 animate-spin' />
                       <span className='relative'>Đang đăng nhập...</span>

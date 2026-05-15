@@ -1,8 +1,18 @@
 ﻿import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Menu, X } from 'lucide-react';
+import { useAuthStore } from '../stores/authStore';
+import { useShallow } from 'zustand/react/shallow';
 
 export default function Navbar() {
+  const { user, accessToken } = useAuthStore(
+    useShallow((state) => ({
+      user: state.user,
+      accessToken: state.accessToken,
+    })),
+  );
+  console.log(user, accessToken);
+
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 

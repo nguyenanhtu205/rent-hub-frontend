@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Building2, MapPin, Search, Sparkles } from 'lucide-react';
-import { HANOI_DISTRICTS, PROPERTY_TYPE_LABELS } from '../constants/mockData';
+import { HANOI_DISTRICTS, PROPERTY_TYPE_LABELS } from '../mocks/data/mockData';
 
 export default function SearchBar() {
   const navigate = useNavigate();

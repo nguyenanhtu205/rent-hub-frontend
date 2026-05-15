@@ -1,4 +1,4 @@
-﻿import { MOCK_HISTORY } from '../../constants/InternalPropertyDetailConstant';
+﻿import { MOCK_HISTORY } from '../../mocks/data/internalMockData';
 import { Clock } from 'lucide-react';
 
 export default function History() {

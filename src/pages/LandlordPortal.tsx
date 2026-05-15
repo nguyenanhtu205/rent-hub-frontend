@@ -13,7 +13,7 @@ import {
   Upload,
   Wallet,
 } from 'lucide-react';
-import { MOCK_PROPERTY_LANDLORD } from '../constants/mockData';
+import { MOCK_PROPERTY_LANDLORD } from '../mocks/data/mockData';
 
 type StatCardProps = {
   title: string;

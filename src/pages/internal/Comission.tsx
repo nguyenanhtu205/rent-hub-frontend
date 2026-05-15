@@ -7,8 +7,19 @@
   TrendingUp,
   Wallet,
 } from 'lucide-react';
-import { MOCK_COMMISSIONS } from '../../constants/internalMockData';
-import { STATUS_LABEL, STATUS_STYLE } from '../../constants/ComissionConstant';
+import { MOCK_COMMISSIONS } from '../../mocks/data/internalMockData';
+
+const STATUS_STYLE: Record<string, string> = {
+  paid: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  approved: 'bg-sky-50 text-sky-700 border-sky-200',
+  pending: 'bg-amber-50 text-amber-700 border-amber-200',
+};
+
+const STATUS_LABEL: Record<string, string> = {
+  paid: 'Đã thanh toán',
+  approved: 'Đã duyệt',
+  pending: 'Chờ duyệt',
+};
 
 export default function Commission() {
   const total = MOCK_COMMISSIONS.reduce((s, c) => s + c.amount, 0);

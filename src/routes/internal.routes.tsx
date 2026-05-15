@@ -16,25 +16,36 @@ import {
   ValuationPage,
   WorkQueuePage,
 } from '../pages/internal';
+import ProtectedRoute from './ProtectedRoute.tsx';
 
 export const internalRoutes = {
   path: '/internal',
-  element: <InternalLayout />,
+  element: (
+    <ProtectedRoute
+      allowedRoles={['broker', 'valuator', 'legal', 'accountant', 'manager']}
+      allowGuest={false}
+    />
+  ),
   children: [
-    { path: 'dashboard', element: <DashboardPage /> },
-    { path: 'work-queue', element: <WorkQueuePage /> },
-    { path: 'properties', element: <PropertyListPage /> },
-    { path: 'properties/:id', element: <PropertyDetailPage /> },
-    { path: 'calendar', element: <CalendarPage /> },
-    { path: 'customers', element: <CustomersPage /> },
-    { path: 'interactions', element: <InteractionHistoryPage /> },
-    { path: 'pipeline', element: <RentalPipelinePage /> },
-    { path: 'record-transaction', element: <RecordTransactionPage /> },
-    { path: 'commission', element: <ComissionPage /> },
-    { path: 'valuation', element: <ValuationPage /> },
-    { path: 'legal-approval', element: <LegalApprovalPage /> },
-    { path: 'deposit', element: <DepositPage /> },
-    { path: 'reports', element: <ReportsPage /> },
-    { path: 'audit-log', element: <AuditLogPage /> },
+    {
+      element: <InternalLayout />,
+      children: [
+        { path: 'dashboard', element: <DashboardPage /> },
+        { path: 'work-queue', element: <WorkQueuePage /> },
+        { path: 'properties', element: <PropertyListPage /> },
+        { path: 'properties/:id', element: <PropertyDetailPage /> },
+        { path: 'calendar', element: <CalendarPage /> },
+        { path: 'customers', element: <CustomersPage /> },
+        { path: 'interactions', element: <InteractionHistoryPage /> },
+        { path: 'pipeline', element: <RentalPipelinePage /> },
+        { path: 'record-transaction', element: <RecordTransactionPage /> },
+        { path: 'commission', element: <ComissionPage /> },
+        { path: 'valuation', element: <ValuationPage /> },
+        { path: 'legal-approval', element: <LegalApprovalPage /> },
+        { path: 'deposit', element: <DepositPage /> },
+        { path: 'reports', element: <ReportsPage /> },
+        { path: 'audit-log', element: <AuditLogPage /> },
+      ],
+    },
   ],
 };
