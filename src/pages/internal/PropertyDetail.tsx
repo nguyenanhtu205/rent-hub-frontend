@@ -4,7 +4,7 @@ import {
   MOCK_APPOINTMENTS,
   MOCK_DEPOSITS,
   MOCK_INT_PROPERTIES,
-} from '../../constants/internalMockData';
+} from '../../mocks/data/internalMockData';
 import {
   AlertTriangle,
   Building2,
@@ -18,12 +18,6 @@ import {
   Wallet,
 } from 'lucide-react';
 import {
-  STATUS_LABEL,
-  STATUS_STYLE,
-  type Tab,
-  TABS,
-} from '../../constants/InternalPropertyDetailConstant';
-import {
   Appointments,
   Contract,
   Docs,
@@ -32,6 +26,35 @@ import {
   Owner,
   Workflow,
 } from '../../components/internal-property-detail';
+import type { Tab } from '../../types/internal';
+
+const TABS: { key: Tab; label: string }[] = [
+  { key: 'owner', label: 'Hồ sơ chủ nhà' },
+  { key: 'docs', label: 'Tài liệu' },
+  { key: 'workflow', label: 'Trạng thái workflow' },
+  { key: 'appointments', label: 'Lịch hẹn' },
+  { key: 'history', label: 'Lịch sử làm việc' },
+  { key: 'contract', label: 'Hợp đồng' },
+  { key: 'finance', label: 'Tài chính' },
+];
+
+const STATUS_STYLE: Record<string, string> = {
+  pending_review: 'bg-amber-100 text-amber-700',
+  under_valuation: 'bg-blue-100 text-blue-700',
+  pending_legal: 'bg-purple-100 text-purple-700',
+  active: 'bg-emerald-100 text-emerald-700',
+  rented: 'bg-slate-100 text-slate-600',
+  rejected: 'bg-red-100 text-red-700',
+};
+
+const STATUS_LABEL: Record<string, string> = {
+  pending_review: 'Chờ thẩm định',
+  under_valuation: 'Đang thẩm định',
+  pending_legal: 'Chờ pháp lý',
+  active: 'Đang tìm khách',
+  rented: 'Đã cho thuê',
+  rejected: 'Từ chối',
+};
 
 function fmt(n: number) {
   return n >= 1_000_000

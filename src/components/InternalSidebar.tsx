@@ -1,19 +1,183 @@
-﻿import { NavLink, useNavigate } from 'react-router-dom';
-import { MENU_ITEMS, ROLE_COLORS, ROLE_LABELS } from '../constants/InternalLayoutConstant';
-import { type Role, ROLE_MENUS } from '../types/internal';
+﻿import { Navigate, NavLink } from 'react-router-dom';
+import { type MenuKey, type MenuItem } from '../types/internal';
 import { useEffect, useState } from 'react';
 import { useAuthStore } from '../stores/authStore';
+import type { Role } from '../types/user.ts';
+import {
+  AuditLogIcon,
+  CalendarIcon,
+  ComissionIcon,
+  CustomerIcon,
+  DashboardIcon,
+  DepositIcon,
+  InteractionIcon,
+  LegalApprovalIcon,
+  PipelineIcon,
+  PropertyIcon,
+  RecordTransactionIcon,
+  ReportIcon,
+  ValuationIcon,
+  WorkQueueIcon,
+} from '../assets/svgIcons';
+
+const MENU_ITEMS: MenuItem[] = [
+  {
+    key: 'dashboard',
+    label: 'Bảng điều khiển',
+    path: '/internal/dashboard',
+    group: 'Tổng quan',
+    icon: <DashboardIcon />,
+  },
+  {
+    key: 'work-queue',
+    label: 'Công việc',
+    path: '/internal/work-queue',
+    group: 'Tổng quan',
+    icon: <WorkQueueIcon />,
+  },
+  {
+    key: 'properties',
+    label: 'Bất động sản',
+    path: '/internal/properties',
+    group: 'Bất động sản',
+    icon: <PropertyIcon />,
+  },
+  {
+    key: 'valuation',
+    label: 'Thẩm định',
+    path: '/internal/valuation',
+    group: 'Bất động sản',
+    icon: <ValuationIcon />,
+  },
+  {
+    key: 'legal-approval',
+    label: 'Phê duyệt pháp lý',
+    path: '/internal/legal-approval',
+    group: 'Bất động sản',
+    icon: <LegalApprovalIcon />,
+  },
+  {
+    key: 'calendar',
+    label: 'Lịch hẹn',
+    path: '/internal/calendar',
+    group: 'Môi giới',
+    icon: <CalendarIcon />,
+  },
+  {
+    key: 'customers',
+    label: 'Khách hàng',
+    path: '/internal/customers',
+    group: 'Môi giới',
+    icon: <CustomerIcon />,
+  },
+  {
+    key: 'interactions',
+    label: 'Lịch sử tương tác',
+    path: '/internal/interactions',
+    group: 'Môi giới',
+    icon: <InteractionIcon />,
+  },
+  {
+    key: 'pipeline',
+    label: 'Pipeline giao dịch',
+    path: '/internal/pipeline',
+    group: 'Môi giới',
+    icon: <PipelineIcon />,
+  },
+  {
+    key: 'record-transaction',
+    label: 'Ghi nhận GD thuê',
+    path: '/internal/record-transaction',
+    group: 'Môi giới',
+    icon: <RecordTransactionIcon />,
+  },
+  {
+    key: 'deposit',
+    label: 'Tiền đảm bảo',
+    path: '/internal/deposit',
+    group: 'Tài chính',
+    icon: <DepositIcon />,
+  },
+  {
+    key: 'commission',
+    label: 'Hoa hồng môi giới',
+    path: '/internal/commission',
+    group: 'Tài chính',
+    icon: <ComissionIcon />,
+  },
+  {
+    key: 'reports',
+    label: 'Báo cáo / KPI',
+    path: '/internal/reports',
+    group: 'Quản lý',
+    icon: <ReportIcon />,
+  },
+  {
+    key: 'audit-log',
+    label: 'Audit Log',
+    path: '/internal/audit-log',
+    group: 'Quản lý',
+    icon: <AuditLogIcon />,
+  },
+];
+
+const ROLE_LABELS: Record<Role, string> = {
+  broker: 'Môi giới',
+  valuator: 'Thẩm định',
+  legal: 'Pháp lý',
+  accountant: 'Kế toán',
+  manager: 'Quản lý',
+  member: '',
+  landlord: '',
+};
+
+const ROLE_COLORS: Record<Role, string> = {
+  broker: 'bg-sky-100 text-sky-700 ring-1 ring-sky-200',
+  valuator: 'bg-amber-100 text-amber-700 ring-1 ring-amber-200',
+  legal: 'bg-violet-100 text-violet-700 ring-1 ring-violet-200',
+  accountant: 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200',
+  manager: 'bg-rose-100 text-rose-700 ring-1 ring-rose-200',
+  member: '',
+  landlord: '',
+};
+
+const ROLE_MENUS: Record<Role, MenuKey[]> = {
+  broker: [
+    'dashboard',
+    'work-queue',
+    'properties',
+    'calendar',
+    'customers',
+    'interactions',
+    'pipeline',
+    'record-transaction',
+    'commission',
+  ],
+  valuator: ['dashboard', 'work-queue', 'properties', 'calendar', 'valuation'],
+  legal: ['dashboard', 'work-queue', 'properties', 'legal-approval'],
+  accountant: ['dashboard', 'work-queue', 'deposit', 'commission', 'reports', 'audit-log'],
+  manager: [
+    'dashboard',
+    'work-queue',
+    'properties',
+    'calendar',
+    'customers',
+    'pipeline',
+    'commission',
+    'valuation',
+    'deposit',
+    'reports',
+    'audit-log',
+  ],
+  member: [],
+  landlord: [],
+};
 
 export default function InternalSidebar() {
-  const { user, setRole } = useAuthStore();
+  const user = useAuthStore((state) => state.user);
 
-  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [showRolePicker, setShowRolePicker] = useState(false);
-
-  const allowed = new Set(ROLE_MENUS[user.role]);
-  const visibleItems = MENU_ITEMS.filter((m) => allowed.has(m.key));
-  const groups = [...new Set(visibleItems.map((m) => m.group))].filter(Boolean) as string[];
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,6 +193,12 @@ export default function InternalSidebar() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  if (!user) return <Navigate to='/login' replace />;
+
+  const allowed = new Set(ROLE_MENUS[user.role]);
+  const visibleItems = MENU_ITEMS.filter((m) => allowed.has(m.key));
+  const groups = [...new Set(visibleItems.map((m) => m.group))].filter(Boolean) as string[];
 
   return (
     <aside
@@ -176,38 +346,6 @@ export default function InternalSidebar() {
                   <polyline points='6 9 12 15 18 9' />
                 </svg>
               </button>
-              {showRolePicker && (
-                <div className='absolute right-0 bottom-full left-0 z-50 mb-2 overflow-hidden rounded-xl border border-sky-200/50 bg-white shadow-2xl ring-1 shadow-sky-900/40 ring-black/5'>
-                  <p className='border-b border-slate-100 bg-linear-to-r from-sky-50 to-amber-50 px-3 py-2 text-[10px] font-bold tracking-wider text-slate-600 uppercase'>
-                    Dev: chuyển role
-                  </p>
-                  {(Object.keys(ROLE_LABELS) as Role[]).map((r) => (
-                    <button
-                      key={r}
-                      onClick={() => {
-                        setRole(r);
-                        setShowRolePicker(false);
-                        navigate('/internal/dashboard');
-                      }}
-                      className={`flex w-full cursor-pointer items-center justify-between px-3 py-2 text-left text-xs font-semibold transition-colors hover:bg-sky-50 ${user.role === r ? 'bg-sky-50/70 text-sky-700' : 'text-slate-700'}`}
-                    >
-                      <span>{ROLE_LABELS[r]}</span>
-                      {user.role === r && (
-                        <svg
-                          width='12'
-                          height='12'
-                          viewBox='0 0 24 24'
-                          fill='none'
-                          stroke='currentColor'
-                          strokeWidth='3'
-                        >
-                          <polyline points='20 6 9 17 4 12' />
-                        </svg>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
         ) : (

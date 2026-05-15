@@ -1,4 +1,4 @@
-﻿import { MOCK_DOCS } from '../../constants/InternalPropertyDetailConstant';
+﻿import { MOCK_DOCS } from '../../mocks/data/internalMockData';
 
 export default function Docs() {
   return (

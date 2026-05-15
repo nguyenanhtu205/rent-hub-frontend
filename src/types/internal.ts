@@ -1,4 +1,4 @@
-﻿export type Role = 'broker' | 'valuator' | 'legal' | 'accountant' | 'manager';
+﻿import type { ReactNode } from 'react';
 
 export type MenuKey =
   | 'dashboard'
@@ -15,44 +15,6 @@ export type MenuKey =
   | 'deposit'
   | 'reports'
   | 'audit-log';
-
-export const ROLE_MENUS: Record<Role, MenuKey[]> = {
-  broker: [
-    'dashboard',
-    'work-queue',
-    'properties',
-    'calendar',
-    'customers',
-    'interactions',
-    'pipeline',
-    'record-transaction',
-    'commission',
-  ],
-  valuator: ['dashboard', 'work-queue', 'properties', 'calendar', 'valuation'],
-  legal: ['dashboard', 'work-queue', 'properties', 'legal-approval'],
-  accountant: ['dashboard', 'work-queue', 'deposit', 'commission', 'reports', 'audit-log'],
-  manager: [
-    'dashboard',
-    'work-queue',
-    'properties',
-    'calendar',
-    'customers',
-    'pipeline',
-    'commission',
-    'valuation',
-    'deposit',
-    'reports',
-    'audit-log',
-  ],
-};
-
-export type InternalUser = {
-  id: string;
-  name: string;
-  email: string;
-  role: Role;
-  avatar?: string;
-};
 
 export type InternalPropertyStatus =
   | 'pending_review'
@@ -177,4 +139,39 @@ export type CommissionRecord = {
   amount: number;
   status: 'pending' | 'approved' | 'paid';
   month: string;
+};
+
+export type AuditLogEntry = {
+  time: string;
+  actor: string;
+  role: string;
+  action: string;
+  target: string;
+  ip: string;
+  type?: 'create' | 'update' | 'delete' | 'login' | 'view';
+};
+
+export type MenuItem = {
+  key: MenuKey;
+  label: string;
+  path: string;
+  icon: ReactNode;
+  group?: string;
+};
+
+export type Tab =
+  | 'owner'
+  | 'docs'
+  | 'workflow'
+  | 'appointments'
+  | 'history'
+  | 'contract'
+  | 'finance';
+
+export type KpiCard = {
+  label: string;
+  value: string | number;
+  sub?: string;
+  color: string;
+  icon: ReactNode;
 };

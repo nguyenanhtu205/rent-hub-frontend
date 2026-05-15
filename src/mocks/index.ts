@@ -1,0 +1,1 @@
+import './handlers/auth.mock';

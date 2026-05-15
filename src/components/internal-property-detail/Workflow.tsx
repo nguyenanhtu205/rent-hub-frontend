@@ -1,10 +1,21 @@
-﻿import { WORKFLOW_STEPS } from '../../constants/InternalPropertyDetailConstant';
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useAuthStore } from '../../stores/authStore';
+import { Navigate } from 'react-router-dom';
+
+const WORKFLOW_STEPS = [
+  { id: 'submit', label: 'Nộp hồ sơ', done: true, date: '2025-05-01' },
+  { id: 'valuate', label: 'Thẩm định thực địa', done: true, date: '2025-05-05' },
+  { id: 'legal', label: 'Kiểm tra pháp lý', done: false, date: null },
+  { id: 'sign', label: 'Ký hợp đồng ký gửi', done: false, date: null },
+  { id: 'marketing', label: 'Tiếp thị / tìm khách', done: false, date: null },
+  { id: 'rented', label: 'Giao dịch hoàn tất', done: false, date: null },
+];
 
 export default function Workflow() {
-  const user = useAuthStore((s) => s.user);
+  const user = useAuthStore((state) => state.user);
   const [note, setNote] = useState('');
+
+  if (!user) return <Navigate to='/login' replace />;
 
   return (
     <div className='relative max-w-full'>

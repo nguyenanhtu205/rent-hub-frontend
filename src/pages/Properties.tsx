@@ -1,7 +1,7 @@
 ﻿import { useMemo, useState } from 'react';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
 import PropertyCard from '../components/PropertyCard';
-import { HANOI_DISTRICTS, MOCK_PROPERTIES, PROPERTY_TYPE_LABELS } from '../constants/mockData';
+import { HANOI_DISTRICTS, MOCK_PROPERTIES, PROPERTY_TYPE_LABELS } from '../mocks/data/mockData';
 
 export default function Properties() {
   const [search, setSearch] = useState('');

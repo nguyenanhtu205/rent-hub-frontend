@@ -18,7 +18,8 @@ import {
 } from 'lucide-react';
 
 type Role = 'member' | 'owner';
- type FormState = {
+
+type FormState = {
   fullName: string;
   email: string;
   phone: string;
@@ -26,7 +27,7 @@ type Role = 'member' | 'owner';
   confirmPassword: string;
   role: Role;
   agree: boolean;
-}
+};
 
 function getPasswordStrength(pw: string): { score: number; label: string; color: string } {
   if (!pw) return { score: 0, label: '', color: '' };

@@ -9,7 +9,7 @@ import {
   Sparkles,
   X,
 } from 'lucide-react';
-import { MOCK_INT_PROPERTIES } from '../../constants/internalMockData';
+import { MOCK_INT_PROPERTIES } from '../../mocks/data/internalMockData';
 
 export default function LegalApproval() {
   const queue = MOCK_INT_PROPERTIES.filter((p) => p.status === 'pending_legal' || p.hasLegalFlag);

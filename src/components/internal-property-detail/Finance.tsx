@@ -1,9 +1,12 @@
 ﻿import { ArrowRight, Wallet } from 'lucide-react';
 import { useAuthStore } from '../../stores/authStore';
 import type { DepositRecord } from '../../types/internal';
+import { Navigate } from 'react-router-dom';
 
 export default function Finance({ deposit }: { deposit: DepositRecord | undefined }) {
-  const user = useAuthStore((s) => s.user);
+  const user = useAuthStore((state) => state.user);
+
+  if (!user) return <Navigate to='/login' replace />;
 
   return (
     <div className='max-w-full space-y-5 px-40'>

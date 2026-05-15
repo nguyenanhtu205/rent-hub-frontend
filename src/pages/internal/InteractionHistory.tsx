@@ -1,10 +1,26 @@
-﻿import { Phone, Plus, Sparkles, User } from 'lucide-react';
-import {
-  INTERACTIONS,
-  TYPE_COLOR,
-  TYPE_DOT,
-  TYPE_ICON,
-} from '../../constants/InteractionHistoryConstant';
+﻿import { Phone, Plus, Sparkles, User, Home, Mail, MessageCircle } from 'lucide-react';
+import {MOCK_INTERACTIONS} from '../../mocks/data/internalMockData';
+
+const TYPE_COLOR: Record<string, string> = {
+  'Gọi điện': 'border-sky-200 bg-sky-50 text-sky-700',
+  'Zalo/Chat': 'border-emerald-200 bg-emerald-50 text-emerald-700',
+  'Xem nhà': 'border-violet-200 bg-violet-50 text-violet-700',
+  Email: 'border-amber-200 bg-amber-50 text-amber-700',
+};
+
+const TYPE_ICON: Record<string, typeof Phone> = {
+  'Gọi điện': Phone,
+  'Zalo/Chat': MessageCircle,
+  'Xem nhà': Home,
+  Email: Mail,
+};
+
+const TYPE_DOT: Record<string, string> = {
+  'Gọi điện': 'from-sky-500 to-blue-700',
+  'Zalo/Chat': 'from-emerald-500 to-teal-700',
+  'Xem nhà': 'from-violet-500 to-purple-700',
+  Email: 'from-amber-400 to-orange-500',
+};
 
 export default function InteractionHistory() {
   return (
@@ -26,7 +42,7 @@ export default function InteractionHistory() {
             Lịch sử tương tác
           </h1>
           <p className='mt-0.5 text-sm text-slate-500'>
-            {INTERACTIONS.length} tương tác gần đây với khách hàng
+            {MOCK_INTERACTIONS.length} tương tác gần đây với khách hàng
           </p>
         </div>
         <button className='group inline-flex cursor-pointer items-center gap-2 rounded-xl bg-linear-to-r from-sky-600 to-blue-700 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-sky-500/40'>
@@ -45,7 +61,7 @@ export default function InteractionHistory() {
           <div className='absolute top-6 bottom-6 left-13 w-px bg-linear-to-b from-sky-200 via-sky-100 to-transparent' />
 
           <div className='space-y-1'>
-            {INTERACTIONS.map((item, i) => {
+            {MOCK_INTERACTIONS.map((item, i) => {
               const Icon = TYPE_ICON[item.type] ?? Phone;
               return (
                 <div

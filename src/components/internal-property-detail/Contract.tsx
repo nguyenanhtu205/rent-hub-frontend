@@ -1,9 +1,12 @@
 ﻿import { AlertTriangle, CheckCircle2, Clock, Download, FileText } from 'lucide-react';
 import { useAuthStore } from '../../stores/authStore';
 import type { InternalProperty } from '../../types/internal';
+import { Navigate } from 'react-router-dom';
 
 export default function Contract({ property }: { property: InternalProperty }) {
-  const user = useAuthStore((s) => s.user);
+  const user = useAuthStore((state) => state.user);
+
+  if (!user) return <Navigate to='/login' replace />;
 
   return (
     <div className='max-w-full space-y-8 px-40 py-6'>
